@@ -56,7 +56,7 @@ class ObjCHeaderRenderer(AbstractObjCRenderer):
     return 'base.h'
 
   def make_context(self, file_name):
-    class_name = file_name.split('.')[0]
+    class_name = file_name.split('.')[-2]
     return locals()
 
 class ObjCRenderer(AbstractObjCRenderer):
@@ -64,16 +64,33 @@ class ObjCRenderer(AbstractObjCRenderer):
     return 'base.m'
 
   def make_context(self, file_name):
-    class_name = file_name.split('.')[0]
+    class_name = file_name.split('.')[-2]
     header_name = self.get_complement(file_name)
     return locals()
 
-class JavaRenderer(Renderer):
+class AbstractJVMRenderer(Renderer):
+  def get_package_name(self, file_name):
+    java_path = file_name.replace('/', '.')
+    package_name = java_path[-1:]
+    return package_name
+
+class JavaRenderer(AbstractJVMRenderer):
   def get_template(self, file_name):
     return 'base.java'
 
   def make_context(self, file_name):
-    class_name = file_name.split('.')[0]
+    class_name = file_name.split('.')[-2]
+    return locals()
+
+class ClojureRenderer(AbstractJVMRenderer):
+  def get_template(self, file_name):
+    return 'base.clj'
+
+  def make_context(self, file_name):
+    package_name = self.get_package_name(file_name)
+    class_name = 'test'
+    #class_name = file_name.split('.')[0]
+    #class_name = file_name.split('.')[-2]
     return locals()
 
 class PythonRenderer(Renderer):
@@ -81,7 +98,7 @@ class PythonRenderer(Renderer):
     return 'base.py'
 
   def make_context(self, file_name):
-    class_name = file_name.split('.')[0]
+    class_name = file_name.split('.')[-2]
     return locals()
 
 class HtmlRenderer(Renderer):
@@ -97,6 +114,8 @@ class Scaffolding:
     filetype = file_name.split('.')[-1]
     if filetype == 'java':
       renderer = JavaRenderer()
+    elif filetype == 'clj':
+      renderer = ClojureRenderer()
     elif filetype == 'py':
       renderer = PythonRenderer()
     elif filetype == 'm':
