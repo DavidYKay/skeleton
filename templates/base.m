@@ -1,10 +1,4 @@
-//
-//  {{ file_name }}
-//  {{ project_name }}
-//
-//  Created by {{ author }} on {{ date }}.
-//  Copyright (c) {{ date.year }} {{ company_name }}. All rights reserved.
-//
+{% include "header.base" %}
 
 #import "{{ header_name }}"
 

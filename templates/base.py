@@ -1,3 +1,5 @@
+{% include "header.base" %}
+
 {% block imports %}{% endblock %}
 
 class {{ class_name }} {% block superclass %}{% endblock %}:

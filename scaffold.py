@@ -86,7 +86,7 @@ class PythonRenderer(Renderer):
 
 class HtmlRenderer(Renderer):
   def get_template(self, file_name):
-    return 'base.h'
+    return 'hello.html'
 
   def make_context(self, file_name):
     name = 'John'
