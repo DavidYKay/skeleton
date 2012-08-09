@@ -27,7 +27,7 @@
 }
 
 #pragma mark - Main Methods
-  
+
 {% block methods %}{% endblock %}
 
 #pragma mark - Private Methods

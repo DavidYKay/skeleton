@@ -30,8 +30,16 @@ class Renderer():
         'author': 'David Y. Kay',
         'company_name': 'Gargoyle Software LLC',
     }
+    
+  def get_template(self, file_name):
+    """ This tells us which template file to render.
+    """
+    raise NotImplementedError
 
   def make_context(self, file_name):
+    """ This is the main override point for our beloved Renderers. 
+        Pass whatever you need into the context.
+    """
     raise NotImplementedError
 
 class AbstractObjCRenderer(Renderer):
